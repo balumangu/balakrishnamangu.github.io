@@ -32,17 +32,18 @@ html, body {
   min-width: 32%;
   background: var(--sidebar-bg);
   border-right: 1px solid var(--border);
-  overflow: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(108,143,255,0.3) transparent;
 }
 
 .sidebar-inner {
   padding: 8px 22px 16px;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
 }
 
 /* Profile */
@@ -124,11 +125,13 @@ html, body {
 /* ── MAIN 68% ── */
 .main {
   flex: 1;
-  overflow: hidden;
+  overflow-y: auto;
   padding: 18px 24px 14px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(108,143,255,0.3) transparent;
 }
 
 /* Experience section grows to fill space */
@@ -264,4 +267,66 @@ html, body {
 .project-card h3 { font-size: 0.78rem; font-weight: 600; color: #eef3ff; line-height: 1.3; }
 .project-card p { font-size: 0.7rem; color: var(--muted); line-height: 1.45; }
 
-::-webkit-scrollbar { display: none; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(108,143,255,0.3); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(108,143,255,0.6); }
+
+/* ── MOBILE RESPONSIVE ── */
+@media (max-width: 768px) {
+  html, body { overflow: auto; height: auto; }
+
+  .layout {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    overflow-y: visible;
+  }
+
+  .sidebar-inner {
+    padding: 20px 18px;
+    min-height: auto;
+    gap: 16px;
+  }
+
+  .profile h1 { font-size: 1.4rem; }
+  .title { font-size: 0.8rem; }
+  .location { font-size: 0.72rem; }
+
+  .summary { font-size: 0.85rem; }
+  .summary-section { padding-bottom: 0; margin-bottom: 16px; }
+
+  .skills-section { flex: none; padding-bottom: 8px; }
+
+  .competency-group { margin-bottom: 12px; }
+
+  .tech-badge, .learning-badge { font-size: 0.72rem; padding: 4px 11px; }
+
+  .main {
+    overflow-y: visible;
+    padding: 20px 18px;
+    gap: 16px;
+  }
+
+  .experience-section { flex: none; }
+
+  .timeline { padding-left: 16px; }
+
+  .experience-card { padding: 12px 14px; }
+  .experience-card li { font-size: 0.82rem; }
+  .card-header { flex-direction: column; gap: 4px; }
+  .date-badge { align-self: flex-start; }
+
+  .project-grid { grid-template-columns: 1fr; }
+
+  .timeline-item { flex: none; margin-bottom: 12px; }
+  .timeline::before { display: none; }
+  .timeline-dot { display: none; }
+}
